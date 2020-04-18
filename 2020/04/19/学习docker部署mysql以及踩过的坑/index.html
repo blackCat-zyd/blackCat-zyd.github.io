@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | 古来圣贤皆寂寞</title>
+  <title>学习docker部署mysql以及踩过的坑 | 古来圣贤皆寂寞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="概述在用docker部署mysql时，刚创建好的mysql容器自动关闭或者是根本无法启动？无法进入mysql容器？那咱们很可能遇见了相同的问题！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/03/hello-world/index.html">
+<meta property="og:title" content="学习docker部署mysql以及踩过的坑">
+<meta property="og:url" content="http://yoursite.com/2020/04/19/%E5%AD%A6%E4%B9%A0docker%E9%83%A8%E7%BD%B2mysql%E4%BB%A5%E5%8F%8A%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/index.html">
 <meta property="og:site_name" content="古来圣贤皆寂寞">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="概述在用docker部署mysql时，刚创建好的mysql容器自动关闭或者是根本无法启动？无法进入mysql容器？那咱们很可能遇见了相同的问题！">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-03T11:04:52.931Z">
-<meta property="article:modified_time" content="2020-04-03T11:04:52.931Z">
+<meta property="article:published_time" content="2020-04-19T15:45:25.000Z">
+<meta property="article:modified_time" content="2020-04-18T16:24:51.698Z">
 <meta property="article:author" content="黑猫">
+<meta property="article:tag" content="docker mysql">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="古来圣贤皆寂寞" type="application/atom+xml">
@@ -150,39 +151,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-学习docker部署mysql以及踩过的坑" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      学习docker部署mysql以及踩过的坑
     </h1>
   
 
         
-        <a href="/2020/04/03/hello-world/" class="archive-article-date">
-  	<time datetime="2020-04-03T11:04:52.931Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+        <a href="/2020/04/19/%E5%AD%A6%E4%B9%A0docker%E9%83%A8%E7%BD%B2mysql%E4%BB%A5%E5%8F%8A%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/" class="archive-article-date">
+  	<time datetime="2020-04-19T15:45:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><pre><code>在用docker部署mysql时，刚创建好的mysql容器自动关闭或者是根本无法启动？无法进入mysql容器？那咱们很可能遇见了相同的问题！</code></pre><hr>
+<a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2 id="创建mysql容器"><a href="#创建mysql容器" class="headerlink" title="创建mysql容器"></a>创建mysql容器</h2><p>1.搜索mysql镜像<br>        docker search mysql<br>2.拉取mysql镜像<br>        docker pull mysql:5.6</p>
+<ol start="3">
+<li><p>创建容器，设置端口映射、目录映射<br>在/root目录下创建mysql目录用于存储mysql数据信息<br> mkdir ~/mysql<br> cd ~/mysql</p>
+<p> docker run -id <br> -p 3307:3306 <br> –name=c_mysql <br> -v $PWD/conf:/etc/mysql/conf.d <br> -v $PWD/logs:/logs <br> -v $PWD/data:/var/lib/mysql <br> -e MYSQL_ROOT_PASSWORD=admin <br> mysql:5.6</p>
+</li>
+</ol>
+<p>参数说明：</p>
+<ul>
+<li><strong>-p 3307:3306</strong>：将容器的 3306 端口映射到宿主机的 3307 端口。</li>
+<li><strong>-v $PWD/conf:/etc/mysql/conf.d</strong>：将主机当前目录下的 conf/my.cnf 挂载到容器的 /etc/mysql/my.cnf。配置目录</li>
+<li><strong>-v $PWD/logs:/logs</strong>：将主机当前目录下的 logs 目录挂载到容器的 /logs。日志目录</li>
+<li><strong>-v $PWD/data:/var/lib/mysql</strong> ：将主机当前目录下的data目录挂载到容器的 /var/lib/mysql 。数据目录</li>
+<li><strong>-e MYSQL_ROOT_PASSWORD=123456：</strong>初始化 root 用户的密码</li>
+</ul>
+<hr>
+<h2 id="现在开始聊一聊我踩过的坑"><a href="#现在开始聊一聊我踩过的坑" class="headerlink" title="现在开始聊一聊我踩过的坑"></a>现在开始聊一聊我踩过的坑</h2><p>我创建完成这个容器之后，想进入容器<br>    docker exec -it c_mysql /bin/bash<br>结果报错如下：<br>    Error response from daemon: Container e24e72d0bcc81711b307dad222d4e750819d889b2d75d30ecb3d81c1cf1b675d is not running</p>
+<p>然后我果断看了一下容器状态 docker ps -a<br>发现容器在几秒前退出了！<br>于是重新启动容器<br>    docker start c_mysql<br>之后又进入容器，还是显示not running。发现应该是启动失败了，于是查看日志 docker logs c_mysql<br>显示如下：<br>    2020-04-18 14:44:05+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.6.47-1debian9 started.<br>    2020-04-18 14:44:06+00:00 [ERROR] [Entrypoint]: mysqld failed while attempting to check config<br>            command was: mysqld –verbose –help<br>            mysqld: Can’t read dir of ‘/etc/mysql/conf.d/‘ (Errcode: 13 - Permission denied)<br>    Fatal error in defaults handling. Program aborted<br>    2020-04-18 14:47:52+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.6.47-1debian9 started.<br>    2020-04-18 14:47:52+00:00 [ERROR] [Entrypoint]: mysqld failed while attempting to check config<br>            command was: mysqld –verbose –help<br>            mysqld: Can’t read dir of ‘/etc/mysql/conf.d/‘ (Errcode: 13 - Permission denied)<br>    Fatal error in defaults handling. Program aborted<br>    2020-04-18 15:02:02+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.6.47-1debian9 started.<br>    2020-04-18 15:02:02+00:00 [ERROR] [Entrypoint]: mysqld failed while attempting to check config<br>            command was: mysqld –verbose –help<br>            mysqld: Can’t read dir of ‘/etc/mysql/conf.d/‘ (Errcode: 13 - Permission denied)<br>    Fatal error in defaults handling. Program aborted</p>
+<p>这个意思大概就是没有权限，启动失败的意思。后面查了查发现是因为Centos7安全Selinux禁止了一些安全权限 。<br>在docker run中加入 –privileged=true 给容器加上特定权限 就ok了。这个问题在给容器配置数据卷时候也遇到过，进入设置的容器目录会因为没有权限禁止访问。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过这个坑，发现我们在学习过程中发现问题后，还是应该深入了解一下问题的根源，想为什么会这样，而不是单纯的为了解决问题贪图一时的速度，这样反而会增加日后的学习难度。</p>
+<p>今天的任务今天干掉，奥利给！</p>
 
       
 
@@ -191,6 +203,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">docker mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -241,7 +264,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/03/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/19/%E5%AD%A6%E4%B9%A0docker%E9%83%A8%E7%BD%B2mysql%E4%BB%A5%E5%8F%8A%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -255,15 +278,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          我的第一篇博客文章
-        
-      </div>
-    </a>
   
+    <a href="/2020/04/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的第一篇博客文章</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
