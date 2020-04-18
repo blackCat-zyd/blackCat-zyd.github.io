@@ -16,7 +16,7 @@
 <meta property="og:description" content="概述在用docker部署mysql时，刚创建好的mysql容器自动关闭或者是根本无法启动？无法进入mysql容器？那咱们很可能遇见了相同的问题！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-19T15:45:25.000Z">
-<meta property="article:modified_time" content="2020-04-18T16:24:51.698Z">
+<meta property="article:modified_time" content="2020-04-18T16:35:29.361Z">
 <meta property="article:author" content="黑猫">
 <meta property="article:tag" content="docker mysql">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,8 @@
 <hr>
 <h2 id="现在开始聊一聊我踩过的坑"><a href="#现在开始聊一聊我踩过的坑" class="headerlink" title="现在开始聊一聊我踩过的坑"></a>现在开始聊一聊我踩过的坑</h2><p>我创建完成这个容器之后，想进入容器<br>    docker exec -it c_mysql /bin/bash<br>结果报错如下：<br>    Error response from daemon: Container e24e72d0bcc81711b307dad222d4e750819d889b2d75d30ecb3d81c1cf1b675d is not running</p>
 <p>然后我果断看了一下容器状态 docker ps -a<br>发现容器在几秒前退出了！<br>于是重新启动容器<br>    docker start c_mysql<br>之后又进入容器，还是显示not running。发现应该是启动失败了，于是查看日志 docker logs c_mysql<br>显示如下：<br>    2020-04-18 14:44:05+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.6.47-1debian9 started.<br>    2020-04-18 14:44:06+00:00 [ERROR] [Entrypoint]: mysqld failed while attempting to check config<br>            command was: mysqld –verbose –help<br>            mysqld: Can’t read dir of ‘/etc/mysql/conf.d/‘ (Errcode: 13 - Permission denied)<br>    Fatal error in defaults handling. Program aborted<br>    2020-04-18 14:47:52+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.6.47-1debian9 started.<br>    2020-04-18 14:47:52+00:00 [ERROR] [Entrypoint]: mysqld failed while attempting to check config<br>            command was: mysqld –verbose –help<br>            mysqld: Can’t read dir of ‘/etc/mysql/conf.d/‘ (Errcode: 13 - Permission denied)<br>    Fatal error in defaults handling. Program aborted<br>    2020-04-18 15:02:02+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.6.47-1debian9 started.<br>    2020-04-18 15:02:02+00:00 [ERROR] [Entrypoint]: mysqld failed while attempting to check config<br>            command was: mysqld –verbose –help<br>            mysqld: Can’t read dir of ‘/etc/mysql/conf.d/‘ (Errcode: 13 - Permission denied)<br>    Fatal error in defaults handling. Program aborted</p>
-<p>这个意思大概就是没有权限，启动失败的意思。后面查了查发现是因为Centos7安全Selinux禁止了一些安全权限 。<br>在docker run中加入 –privileged=true 给容器加上特定权限 就ok了。这个问题在给容器配置数据卷时候也遇到过，进入设置的容器目录会因为没有权限禁止访问。</p>
+<hr>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>这个意思大概就是没有权限，启动失败的意思。后面查了查发现是因为Centos7安全Selinux禁止了一些安全权限 。<br>在docker run中加入 –privileged=true 给容器加上特定权限 就ok了。这个问题在给容器配置数据卷时候也遇到过，进入设置的容器目录会因为没有权限禁止访问。</p>
 <hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过这个坑，发现我们在学习过程中发现问题后，还是应该深入了解一下问题的根源，想为什么会这样，而不是单纯的为了解决问题贪图一时的速度，这样反而会增加日后的学习难度。</p>
 <p>今天的任务今天干掉，奥利给！</p>
